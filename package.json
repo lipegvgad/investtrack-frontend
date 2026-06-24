@@ -1,0 +1,17 @@
+{
+  "name": "investtrack-web",
+  "version": "1.0.0",
+  "description": "Frontend (TypeScript) do InvestTrack - 2o Trabalho de Programacao para Web (INF1407 2026/1)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
+  }
+}

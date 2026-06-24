@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InvestTrack — Criar conta</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <main class="auth">
+      <section class="card">
+        <div class="logo">InvestTrack</div>
+        <p class="subtitulo">Crie sua conta para começar</p>
+
+        <div id="mensagem" class="mensagem" hidden></div>
+
+        <form id="form-cadastro">
+          <label for="username">Usuário</label>
+          <input id="username" type="text" autocomplete="username" required />
+
+          <label for="first_name">Nome</label>
+          <input id="first_name" type="text" autocomplete="name" />
+
+          <label for="email">E-mail</label>
+          <input id="email" type="email" autocomplete="email" required />
+
+          <label for="password">Senha</label>
+          <input id="password" type="password" autocomplete="new-password" required />
+
+          <label for="password2">Confirme a senha</label>
+          <input id="password2" type="password" autocomplete="new-password" required />
+
+          <button class="btn" type="submit">Criar conta</button>
+        </form>
+
+        <div class="links">
+          <a href="index.html">Já tenho conta</a>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/register.ts"></script>
+  </body>
+</html>

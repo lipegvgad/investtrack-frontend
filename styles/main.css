@@ -1,0 +1,340 @@
+:root {
+  --azul: #2563eb;
+  --azul-escuro: #1e40af;
+  --verde: #16a34a;
+  --vermelho: #dc2626;
+  --cinza: #64748b;
+  --cinza-claro: #f1f5f9;
+  --borda: #e2e8f0;
+  --texto: #0f172a;
+  --fundo: #f8fafc;
+  --sombra: 0 1px 3px rgba(15, 23, 42, 0.1), 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+a {
+  color: var(--azul);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------------- Telas auth */
+.auth {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.card .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--azul);
+  margin-bottom: 0.25rem;
+}
+.card .subtitulo {
+  color: var(--cinza);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: var(--texto);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  background: #fff;
+  color: var(--texto);
+}
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.7rem;
+  background: var(--azul);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.btn:hover {
+  background: var(--azul-escuro);
+}
+
+.links {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+}
+
+.mensagem {
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.mensagem--erro {
+  background: #fef2f2;
+  color: var(--vermelho);
+  border: 1px solid #fecaca;
+}
+.mensagem--sucesso {
+  background: #f0fdf4;
+  color: var(--verde);
+  border: 1px solid #bbf7d0;
+}
+
+/* ----------------------------------------------------------------- App */
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--borda);
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.topbar .marca {
+  font-weight: 700;
+  color: var(--azul);
+  font-size: 1.2rem;
+}
+.topbar .usuario {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.topbar .usuario span {
+  color: var(--cinza);
+  font-size: 0.9rem;
+}
+
+.abas {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid var(--borda);
+}
+.abas button {
+  background: none;
+  border: none;
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cinza);
+  border-bottom: 3px solid transparent;
+}
+.abas button.ativo {
+  color: var(--azul);
+  border-bottom-color: var(--azul);
+}
+
+.conteudo {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.cards-resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.card-resumo {
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: var(--sombra);
+}
+.card-resumo .rotulo {
+  color: var(--cinza);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.card-resumo .valor {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+}
+
+.painel {
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--sombra);
+  margin-bottom: 1.5rem;
+}
+.painel h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0 1rem;
+  align-items: end;
+}
+.grid-form .acoes-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-sec {
+  padding: 0.6rem 1rem;
+  background: var(--cinza-claro);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--texto);
+}
+.btn-pequeno {
+  padding: 0.6rem 1.1rem;
+  background: var(--azul);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.barra-busca {
+  margin-bottom: 1rem;
+}
+.barra-busca input {
+  max-width: 320px;
+  margin-bottom: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+th,
+td {
+  text-align: left;
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid var(--borda);
+}
+th {
+  color: var(--cinza);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td.acoes {
+  display: flex;
+  gap: 0.4rem;
+}
+.vazio {
+  color: var(--cinza);
+  text-align: center;
+  font-style: italic;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--cinza-claro);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--azul-escuro);
+}
+
+.btn-mini {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  border: 1px solid var(--borda);
+  background: #fff;
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--texto);
+}
+.btn-mini:hover {
+  background: var(--cinza-claro);
+}
+.btn-perigo {
+  color: var(--vermelho);
+  border-color: #fecaca;
+}
+.btn-perigo:hover {
+  background: #fef2f2;
+}
+
+.lista-distribuicao {
+  list-style: none;
+}
+.lista-distribuicao li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.colunas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.dica {
+  font-size: 0.85rem;
+  color: var(--cinza);
+  margin-top: 0.5rem;
+}
