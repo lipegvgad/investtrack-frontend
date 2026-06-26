@@ -1,0 +1,13 @@
+# Dependências e build (recriados dentro da imagem)
+node_modules/
+dist/
+
+# Controle de versão e ambiente
+.git/
+.gitignore
+.env
+.env.local
+
+# Sistema / logs
+.DS_Store
+*.log
