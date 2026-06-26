@@ -109,7 +109,7 @@ async function carregarAtivos(): Promise<void> {
 
   if (ativos.length === 0) {
     tbody.innerHTML =
-      "<tr><td colspan='5' class='vazio'>Nenhum ativo cadastrado.</td></tr>";
+      "<tr><td colspan='6' class='vazio'>Nenhum ativo cadastrado.</td></tr>";
   } else {
     tbody.innerHTML = ativos
       .map(
