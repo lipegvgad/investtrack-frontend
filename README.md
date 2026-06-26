@@ -112,15 +112,35 @@ npm run preview    # serve o build localmente para conferência
 
 ## Execução com Docker
 
-```bash
-# build (informe a URL da API em produção)
-docker build --build-arg VITE_API_URL=https://sua-api.com/api -t investtrack-web .
+### Usando a imagem publicada no Docker Hub
 
-# executa servindo na porta 8080
+A imagem do frontend é compilada apontando para a API em
+`http://localhost:8000/api`. Por isso, suba os dois containers (API e Web) na
+mesma máquina, com a API na porta 8000:
+
+```bash
+# 1) Backend (API) na porta 8000
+docker pull lipegvgad/investtrack-api:latest
+docker run -d -p 8000:8000 -e SECRET_KEY=alguma-chave lipegvgad/investtrack-api:latest
+
+# 2) Frontend (Web) na porta 8080
+docker pull lipegvgad/investtrack-web:latest
+docker run -d -p 8080:80 lipegvgad/investtrack-web:latest
+```
+
+Acesse http://localhost:8080 (o navegador conversa com a API em
+`http://localhost:8000`).
+
+### Build local da imagem
+
+```bash
+# build (informe a URL da API; padrão: http://localhost:8000/api)
+docker build --build-arg VITE_API_URL=http://localhost:8000/api -t investtrack-web .
 docker run -p 8080:80 investtrack-web
 ```
 
-Acesse http://localhost:8080.
+Para apontar para uma API hospedada (URL pública), refaça o build com
+`--build-arg VITE_API_URL=https://sua-api.com/api`.
 
 ---
 
