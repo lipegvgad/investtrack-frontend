@@ -79,8 +79,8 @@ Precisa de Node.js 18+ e da [InvestTrack API](#backend) rodando (por padrão em
 `http://localhost:8000`).
 
 ```bash
-git clone <url-deste-repositorio>
-cd frontend
+git clone https://github.com/lipegvgad/investtrack-frontend.git
+cd investtrack-frontend
 
 npm install
 npm run dev
@@ -126,12 +126,12 @@ Acesse http://localhost:8080.
 
 ## Publicação
 
-- Repositório (frontend): (link do repositório do frontend)
-- Site publicado (frontend): (link do site publicado)
+- Repositório (frontend): https://github.com/lipegvgad/investtrack-frontend
+- Site publicado (frontend): a preencher após o deploy (ex.: `https://investtrack-web.onrender.com`)
 
 <a name="backend"></a>
-- Repositório (backend / API): (link do repositório do backend)
-- API publicada (Swagger): (link da API publicada)
+- Repositório (backend / API): https://github.com/lipegvgad/investtrack-backend
+- API publicada (Swagger): a preencher após o deploy (ex.: `https://investtrack-api.onrender.com/api/docs/`)
 
 ---
 
