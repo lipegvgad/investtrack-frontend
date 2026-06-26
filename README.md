@@ -147,11 +147,14 @@ Para apontar para uma API hospedada (URL pública), refaça o build com
 ## Publicação
 
 - Repositório (frontend): https://github.com/lipegvgad/investtrack-frontend
-- Site publicado (frontend): a preencher após o deploy (ex.: `https://investtrack-web.onrender.com`)
+- Imagem publicada (Docker Hub): https://hub.docker.com/r/lipegvgad/investtrack-web
 
 <a name="backend"></a>
 - Repositório (backend / API): https://github.com/lipegvgad/investtrack-backend
-- API publicada (Swagger): a preencher após o deploy (ex.: `https://investtrack-api.onrender.com/api/docs/`)
+- Imagem do backend (Docker Hub): https://hub.docker.com/r/lipegvgad/investtrack-api
+
+As duas imagens são multi-arquitetura (`linux/amd64` e `linux/arm64`). Veja na
+seção [Execução com Docker](#execução-com-docker) como subir os dois containers.
 
 ---
 
