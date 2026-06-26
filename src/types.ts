@@ -28,7 +28,14 @@ export interface Ativo {
   tipo_display: string;
   categoria: number;
   categoria_nome: string;
+  preco_atual: string | null;
+  preco_atualizado_em: string | null;
+  quantidade_total: string;
   total_investido: string;
+  preco_medio: string | null;
+  valor_atual: string | null;
+  lucro: string | null;
+  rentabilidade_pct: string | null;
   criado_em: string;
 }
 
@@ -46,10 +53,20 @@ export interface DistribuicaoItem {
   tipo: string;
   tipo_display: string;
   total: string;
+  percentual: string;
 }
 
 export interface Resumo {
   total_investido: string;
+  patrimonio_atual: string;
+  lucro_total: string;
+  rentabilidade_pct: string;
   quantidade_aportes: number;
   distribuicao_por_tipo: DistribuicaoItem[];
+}
+
+export interface AtualizacaoCotacoes {
+  atualizados: number;
+  sem_cotacao: string[];
+  ativos: Ativo[];
 }

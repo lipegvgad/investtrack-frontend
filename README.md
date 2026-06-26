@@ -25,8 +25,11 @@ Aplicação web multipágina onde cada usuário gerencia a própria carteira:
 - CRUD completo (as quatro operações) sobre dois recursos:
   - Ativos: criar, listar/buscar, editar e excluir.
   - Aportes: criar, listar, editar e excluir.
-- Dashboard com resumo do portfólio: total investido, número de ativos e aportes,
-  e distribuição por tipo de ativo.
+- Cotações em tempo real: botão "Atualizar cotações" que busca o preço atual dos
+  ativos (via Yahoo Finance, no backend) e recalcula a carteira.
+- Dashboard com resumo do portfólio: total investido, patrimônio atual,
+  lucro/prejuízo em R$ e %, preço médio por ativo, gráfico donut de distribuição
+  e número de ativos/aportes.
 
 ---
 
@@ -166,14 +169,18 @@ seção [Execução com Docker](#execução-com-docker) como subir os dois conta
 - Isolamento por usuário: cada conta enxerga apenas a própria carteira.
 - Troca de senha e recuperação de senha (esqueci, e-mail, redefinir).
 - Renovação automática do token de acesso quando ele expira.
+- Atualização de cotações pelo botão, com gráfico donut, preço médio e
+  lucro/prejuízo recalculados (testado com ações da B3 e criptomoedas).
 - Build TypeScript sem erros (`npm run build`) e execução em container Nginx.
 - Fluxo completo testado em navegador (cadastro, login, CRUD, conta), sem erros
   de página ou de requisição.
 
 ## O que não funcionou / limitações conhecidas
 
-- Não há gráfico visual (apenas a lista de distribuição por tipo). O resumo é
-  textual/numérico.
+- As cotações dependem da disponibilidade do Yahoo Finance. Ativos sem ticker
+  correspondente (por exemplo, renda fixa) ficam sem preço automático e são
+  listados em "sem cotação"; nesse caso o preço pode ser informado manualmente no
+  ativo.
 - O recebimento real do e-mail de redefinição depende da configuração SMTP no
   backend. Sem ela, o link aparece no console do servidor da API.
 - A sessão é mantida no `localStorage`. Não há "lembrar-me" configurável nem

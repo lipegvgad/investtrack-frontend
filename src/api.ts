@@ -12,6 +12,7 @@ import {
 } from "./auth";
 import type {
   Aporte,
+  AtualizacaoCotacoes,
   Ativo,
   Categoria,
   Resumo,
@@ -186,19 +187,33 @@ export const api = {
     ticker: string;
     tipo: string;
     categoria: number;
+    preco_atual?: string | null;
   }): Promise<Ativo> {
     return request<Ativo>("/ativos/", { method: "POST", body: payload });
   },
 
   atualizarAtivo(
     id: number,
-    payload: { nome: string; ticker: string; tipo: string; categoria: number },
+    payload: {
+      nome: string;
+      ticker: string;
+      tipo: string;
+      categoria: number;
+      preco_atual?: string | null;
+    },
   ): Promise<Ativo> {
     return request<Ativo>(`/ativos/${id}/`, { method: "PUT", body: payload });
   },
 
   excluirAtivo(id: number): Promise<void> {
     return request<void>(`/ativos/${id}/`, { method: "DELETE" });
+  },
+
+  // Atualiza as cotações de todos os ativos do usuário (via Yahoo Finance).
+  atualizarCotacoes(): Promise<AtualizacaoCotacoes> {
+    return request<AtualizacaoCotacoes>("/ativos/atualizar-cotacoes/", {
+      method: "POST",
+    });
   },
 
   // -------------------------------------------------------------------------

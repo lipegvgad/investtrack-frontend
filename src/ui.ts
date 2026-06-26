@@ -44,3 +44,25 @@ export function escapar(texto: string): string {
   div.textContent = texto;
   return div.innerHTML;
 }
+
+// Formata uma quantidade removendo zeros decimais inúteis (100.000000 -> 100).
+export function formatarQuantidade(valor: string | number): string {
+  const numero = typeof valor === "string" ? Number(valor) : valor;
+  return numero.toLocaleString("pt-BR", { maximumFractionDigits: 6 });
+}
+
+// Formata um percentual com sinal (+/-) e duas casas.
+export function formatarPercentual(valor: string | number): string {
+  const numero = typeof valor === "string" ? Number(valor) : valor;
+  const sinal = numero > 0 ? "+" : "";
+  return `${sinal}${numero.toFixed(2).replace(".", ",")}%`;
+}
+
+// Classe CSS de cor conforme o número seja positivo, negativo ou neutro.
+export function classeVariacao(valor: string | number | null): string {
+  if (valor === null) return "";
+  const numero = typeof valor === "string" ? Number(valor) : valor;
+  if (numero > 0) return "positivo";
+  if (numero < 0) return "negativo";
+  return "";
+}
