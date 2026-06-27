@@ -63,6 +63,24 @@
           </div>
         </div>
 
+        <!-- ------------------ Evolução do patrimônio (linha) ------------ -->
+        <div class="painel">
+          <h2>Evolução do patrimônio investido</h2>
+          <div id="grafico-evolucao" class="grafico-linha">
+            <p class="vazio">Carregando...</p>
+          </div>
+        </div>
+
+        <!-- ------------------ Mercado do ativo (sob demanda) ----------- -->
+        <div class="painel" id="painel-mercado" hidden>
+          <div class="painel-cabecalho">
+            <h2 id="mercado-titulo">Mercado</h2>
+            <button id="mercado-fechar" class="btn-sec" type="button">Fechar</button>
+          </div>
+          <div id="mercado-indicadores" class="indicadores"></div>
+          <div id="mercado-grafico" class="grafico-linha"></div>
+        </div>
+
         <!-- ---------------------------- Ativos -------------------------- -->
         <div class="painel">
           <h2 id="form-ativo-titulo">Novo ativo</h2>

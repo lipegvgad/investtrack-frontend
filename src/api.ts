@@ -15,6 +15,8 @@ import type {
   AtualizacaoCotacoes,
   Ativo,
   Categoria,
+  EvolucaoItem,
+  Mercado,
   Resumo,
   Tokens,
   Usuario,
@@ -216,6 +218,11 @@ export const api = {
     });
   },
 
+  // Histórico de preço + indicadores de mercado de um ativo (via Yahoo Finance).
+  mercado(id: number): Promise<Mercado> {
+    return request<Mercado>(`/ativos/${id}/mercado/`);
+  },
+
   // -------------------------------------------------------------------------
   // Aportes (CRUD)
   // -------------------------------------------------------------------------
@@ -250,5 +257,10 @@ export const api = {
 
   resumo(): Promise<Resumo> {
     return request<Resumo>("/aportes/resumo/");
+  },
+
+  // Evolução do patrimônio investido (acumulado mês a mês).
+  evolucao(): Promise<EvolucaoItem[]> {
+    return request<EvolucaoItem[]>("/aportes/evolucao/");
   },
 };

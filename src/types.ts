@@ -70,3 +70,28 @@ export interface AtualizacaoCotacoes {
   sem_cotacao: string[];
   ativos: Ativo[];
 }
+
+export interface EvolucaoItem {
+  mes: string;
+  investido: string;
+  acumulado: string;
+}
+
+export interface PontoHistorico {
+  data: string;
+  preco: string;
+}
+
+export interface Mercado {
+  simbolo: string;
+  nome: string;
+  moeda: string | null;
+  preco: string | null;
+  variacao_dia_pct: string | null;
+  maxima_dia: string | null;
+  minima_dia: string | null;
+  max_52s: string | null;
+  min_52s: string | null;
+  volume: number | null;
+  historico: PontoHistorico[];
+}

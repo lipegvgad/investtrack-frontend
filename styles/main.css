@@ -398,6 +398,55 @@ td.acoes {
   overflow-x: auto;
 }
 
+/* --------------------------------------------------- Gráficos de linha */
+.grafico-linha {
+  width: 100%;
+}
+.svg-linha {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.svg-linha .eixo {
+  stroke: var(--borda);
+  stroke-width: 1;
+}
+.svg-linha .rotulo-eixo {
+  fill: var(--cinza);
+  font-size: 11px;
+}
+.svg-linha .rotulo-eixo.fim,
+.svg-linha .rotulo-eixo.inicio {
+  text-anchor: end;
+}
+.grafico-unico {
+  color: var(--cinza);
+}
+
+/* Indicadores de mercado (variação do dia, máx/mín 52 sem., etc.) */
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.indicador {
+  background: var(--cinza-claro);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+}
+.indicador .rotulo {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--cinza);
+}
+.indicador .valor {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
 .colunas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

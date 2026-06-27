@@ -4,6 +4,7 @@
 // autenticado e a área de conta (editar perfil e trocar senha).
 import { api } from "./api";
 import { exigirAutenticacao, logout } from "./auth";
+import { graficoLinha } from "./grafico";
 import type { Ativo, Categoria } from "./types";
 import {
   classeVariacao,
@@ -107,6 +108,75 @@ async function carregarResumo(): Promise<void> {
 }
 
 // ---------------------------------------------------------------------------
+// Gráfico de evolução do patrimônio investido (linha)
+// ---------------------------------------------------------------------------
+async function carregarEvolucao(): Promise<void> {
+  const alvo = el("grafico-evolucao");
+  const dados = await api.evolucao();
+  if (dados.length === 0) {
+    alvo.innerHTML = "<p class='vazio'>Registre aportes para ver a evolução.</p>";
+    return;
+  }
+  alvo.innerHTML = graficoLinha(
+    dados.map((d) => ({ rotulo: d.mes, valor: Number(d.acumulado) })),
+    { cor: "#2563eb", moeda: true },
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Painel de mercado de um ativo (histórico de preço + indicadores)
+// ---------------------------------------------------------------------------
+async function abrirMercado(id: number): Promise<void> {
+  const painel = el("painel-mercado");
+  const indicadores = el("mercado-indicadores");
+  const grafico = el("mercado-grafico");
+  el("mercado-titulo").textContent = "Carregando mercado...";
+  indicadores.innerHTML = "";
+  grafico.innerHTML = "<p class='vazio'>Carregando...</p>";
+  painel.hidden = false;
+  painel.scrollIntoView({ behavior: "smooth" });
+
+  try {
+    const m = await api.mercado(id);
+    el("mercado-titulo").textContent = `${m.nome} (${m.simbolo})`;
+
+    const cards: Array<[string, string]> = [
+      ["Preço atual", m.preco ? formatarMoeda(m.preco) : "—"],
+      [
+        "Variação do dia",
+        m.variacao_dia_pct !== null ? formatarPercentual(m.variacao_dia_pct) : "—",
+      ],
+      ["Máx. do dia", m.maxima_dia ? formatarMoeda(m.maxima_dia) : "—"],
+      ["Mín. do dia", m.minima_dia ? formatarMoeda(m.minima_dia) : "—"],
+      ["Máx. 52 sem.", m.max_52s ? formatarMoeda(m.max_52s) : "—"],
+      ["Mín. 52 sem.", m.min_52s ? formatarMoeda(m.min_52s) : "—"],
+      ["Volume", m.volume !== null ? formatarQuantidade(m.volume) : "—"],
+    ];
+    indicadores.innerHTML = cards
+      .map(([rotulo, valor], i) => {
+        const cls = i === 1 ? classeVariacao(m.variacao_dia_pct) : "";
+        return `<div class="indicador">
+          <div class="rotulo">${rotulo}</div>
+          <div class="valor ${cls}">${escapar(valor)}</div>
+        </div>`;
+      })
+      .join("");
+
+    grafico.innerHTML = graficoLinha(
+      m.historico.map((p) => ({ rotulo: p.data, valor: Number(p.preco) })),
+      { cor: "#16a34a", moeda: true },
+    );
+  } catch (erro) {
+    el("mercado-titulo").textContent = "Mercado";
+    grafico.innerHTML = `<p class='vazio'>${escapar((erro as Error).message)}</p>`;
+  }
+}
+
+el<HTMLButtonElement>("mercado-fechar").addEventListener("click", () => {
+  el("painel-mercado").hidden = true;
+});
+
+// ---------------------------------------------------------------------------
 // Categorias / selects
 // ---------------------------------------------------------------------------
 async function carregarCategorias(): Promise<void> {
@@ -166,6 +236,7 @@ async function carregarAtivos(): Promise<void> {
           <td>${valorAtual}</td>
           <td>${rent}</td>
           <td class="acoes">
+            <button class="btn-mini" data-mercado-ativo="${a.id}">Mercado</button>
             <button class="btn-mini" data-editar-ativo="${a.id}">Editar</button>
             <button class="btn-mini btn-perigo" data-excluir-ativo="${a.id}">Excluir</button>
           </td>
@@ -245,6 +316,12 @@ el<HTMLButtonElement>("btn-atualizar-cotacoes").addEventListener("click", async 
 
 el<HTMLTableSectionElement>("tabela-ativos").addEventListener("click", async (evento) => {
   const alvo = evento.target as HTMLElement;
+
+  const idMercado = alvo.dataset.mercadoAtivo;
+  if (idMercado) {
+    await abrirMercado(Number(idMercado));
+    return;
+  }
 
   const idEditar = alvo.dataset.editarAtivo;
   if (idEditar) {
@@ -342,6 +419,7 @@ el<HTMLFormElement>("form-aporte").addEventListener("submit", async (evento) => 
     await carregarAportes();
     await carregarAtivos();
     await carregarResumo();
+    await carregarEvolucao();
   } catch (erro) {
     mostrarMensagem(msgAporte(), (erro as Error).message, "erro");
   }
@@ -371,6 +449,7 @@ el<HTMLTableSectionElement>("tabela-aportes").addEventListener("click", async (e
       await carregarAportes();
       await carregarAtivos();
       await carregarResumo();
+      await carregarEvolucao();
     } catch (erro) {
       mostrarMensagem(msgAporte(), (erro as Error).message, "erro");
     }
@@ -426,6 +505,7 @@ async function iniciar(): Promise<void> {
     await carregarAtivos();
     await carregarAportes();
     await carregarResumo();
+    await carregarEvolucao();
   } catch (erro) {
     console.error(erro);
   }
